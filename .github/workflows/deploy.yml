@@ -3,7 +3,7 @@ name: Build and Deploy React to Fasthosts (FTP)
 on:
   push:
     branches:
-      - main   # or 'master' if that's your default branch
+      - main   # or 'master'
 
 jobs:
   deploy:
@@ -59,7 +59,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /htdocs
+          server-dir: /htdocs/
           local-dir: ${{ env.OUTPUT_DIR }}/
           exclude: |
             **/.git*
