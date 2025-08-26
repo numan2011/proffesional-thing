@@ -1,1 +1,1 @@
-icl I solo
+icl I solo fr fr
