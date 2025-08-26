@@ -8,6 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -19,14 +20,31 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
 
       - name: Build React app
         run: npm run build
 
+      - name: Detect build output folder
+        run: |
+          if [ -d "build" ]; then
+            echo "OUTPUT_DIR=build" >> $GITHUB_ENV
+          elif [ -d "dist" ]; then
+            echo "OUTPUT_DIR=dist" >> $GITHUB_ENV
+          else
+            echo "❌ Could not find build output folder (build/ or dist/)." >&2
+            exit 1
+          fi
+
       - name: Add .htaccess for React Router
         run: |
-          cat > build/.htaccess <<'EOF'
+          mkdir -p ${{ env.OUTPUT_DIR }}
+          cat > "${{ env.OUTPUT_DIR }}/.htaccess" <<'EOF'
           RewriteEngine On
           RewriteBase /
           RewriteRule ^index\.html$ - [L]
@@ -42,4 +60,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: /htdocs   # change to /htdocs if that's your folder
-          local-dir: build
+          local-dir: ${{ env.OUTPUT_DIR }}
+          exclude: |
+            **/.git*
+            **/.github*
