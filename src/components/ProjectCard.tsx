@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Github, ExternalLink, Award, Sparkles, Brain, Stethoscope } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface ProjectCardProps {
   title: string;
@@ -10,9 +11,12 @@ interface ProjectCardProps {
   icon: "sparx" | "reading" | "stethoscope";
   isLarge?: boolean;
   award?: string;
+  githubUrl?: string;
+  demoUrl?: string;
 }
 
-const ProjectCard = ({ title, description, technologies, icon, isLarge = false, award }: ProjectCardProps) => {
+const ProjectCard = ({ title, description, technologies, icon, isLarge = false, award, githubUrl, demoUrl }: ProjectCardProps) => {
+  const navigate = useNavigate();
   const getIcon = () => {
     switch (icon) {
       case "sparx":
@@ -50,12 +54,31 @@ const ProjectCard = ({ title, description, technologies, icon, isLarge = false, 
           ))}
         </div>
         
-        <div className="flex gap-2">
-          <Button size="sm" variant="outline" className="group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+        <div className="flex gap-3">
+          <Button 
+            size="sm" 
+            variant="outline" 
+            className="group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 hover:scale-105 hover:shadow-lg backdrop-blur-sm border-border/40 bg-background/80"
+            onClick={() => {
+              if (githubUrl) {
+                window.open(githubUrl, '_blank');
+              } else {
+                navigate('/you-really-thought');
+              }
+            }}
+          >
             <Github className="h-4 w-4 mr-2" />
             Code
           </Button>
-          <Button size="sm" className="group-hover:shadow-lg transition-all duration-300">
+          <Button 
+            size="sm" 
+            className="group-hover:shadow-xl transition-all duration-300 hover:scale-105 bg-primary/90 hover:bg-primary text-primary-foreground shadow-lg"
+            onClick={() => {
+              if (demoUrl) {
+                window.open(demoUrl, '_blank');
+              }
+            }}
+          >
             <ExternalLink className="h-4 w-4 mr-2" />
             Demo
           </Button>

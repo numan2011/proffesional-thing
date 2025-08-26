@@ -8,19 +8,29 @@ const ProjectsSection = () => {
       technologies: ["Python", "TensorFlow", "Dual Bayesian ResNet", "Medical AI", "Signal Processing"],
       icon: "stethoscope" as const,
       isLarge: true,
-      award: "Award-Winning AI"
+      award: "Award-Winning AI",
+      githubUrl: "https://github.com/numan2011/stethicope-private-project-type-shi",
+      demoUrl: undefined
     },
     {
       title: "SparxMaths AutoCompleter",
       description: "Intelligent automation tool that streamlines mathematical problem-solving workflows. Features smart recognition algorithms and seamless integration.",
       technologies: ["JavaScript", "Automation", "Web APIs", "Chrome Extension"],
-      icon: "sparx" as const
+      icon: "sparx" as const,
+      isLarge: undefined,
+      award: undefined,
+      githubUrl: undefined,
+      demoUrl: undefined
     },
     {
       title: "Reading Plus AutoCompleter",
       description: "Advanced reading comprehension assistant that enhances learning efficiency through intelligent text analysis and automated completion.",
       technologies: ["JavaScript", "NLP", "Automation", "Educational Tech"],
-      icon: "reading" as const
+      icon: "reading" as const,
+      isLarge: undefined,
+      award: undefined,
+      githubUrl: undefined,
+      demoUrl: undefined
     }
   ];
 
@@ -46,6 +56,8 @@ const ProjectsSection = () => {
               icon={project.icon}
               isLarge={project.isLarge}
               award={project.award}
+              githubUrl={project.githubUrl}
+              demoUrl={project.demoUrl}
             />
           ))}
         </div>
