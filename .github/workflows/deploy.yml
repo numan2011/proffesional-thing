@@ -59,8 +59,8 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /htdocs   # change to /htdocs if that's your folder
-          local-dir: ${{ env.OUTPUT_DIR }}
+          server-dir: /htdocs
+          local-dir: ${{ env.OUTPUT_DIR }}/
           exclude: |
             **/.git*
             **/.github*
