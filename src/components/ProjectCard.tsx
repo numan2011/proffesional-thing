@@ -25,7 +25,7 @@ const ProjectCard = ({ title, description, technologies, icon, isLarge = false, 
   };
 
   return (
-    <Card className={`bento-item group ${isLarge ? 'md:col-span-2 lg:col-span-2' : ''} relative overflow-hidden`}>
+    <Card className={`bento-item group ${isLarge ? "md:col-span-2 lg:col-span-2" : ""} relative overflow-hidden bg-card/40 backdrop-blur-lg border border-border/20`}>
       <div className="relative z-10">
         <div className="flex items-start justify-between mb-4">
           <div className="floating-animation">

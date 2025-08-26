@@ -1,8 +1,21 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowDown, Code, Heart, Zap } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
+
+  const scrollToProjects = () => {
+    const projectsSection = document.getElementById("projects");
+    if (projectsSection) {
+      projectsSection.scrollIntoView({ 
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+  };
+
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-background via-accent/20 to-background" />
@@ -27,11 +40,20 @@ const Hero = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Button size="lg" className="group hover:shadow-xl transition-all duration-300">
+            <Button 
+              size="lg" 
+              className="group hover:shadow-xl transition-all duration-300 bg-card/40 backdrop-blur-lg border border-border/20"
+              onClick={scrollToProjects}
+            >
               <Code className="h-5 w-5 mr-2 group-hover:rotate-12 transition-transform" />
               View My Work
             </Button>
-            <Button size="lg" variant="outline" className="group">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="group bg-card/20 backdrop-blur-lg border border-border/20"
+              onClick={() => navigate("/contact")}
+            >
               <Heart className="h-5 w-5 mr-2 group-hover:text-red-500 transition-colors" />
               Get In Touch
             </Button>

@@ -108,7 +108,7 @@ All colors MUST be HSL.
   }
   
   .bento-item {
-    @apply rounded-xl border border-border/50 bg-card/50 backdrop-blur-sm p-6 transition-all duration-300 hover:shadow-lg hover:border-border hover:-translate-y-1;
+    @apply rounded-xl border border-border/20 bg-card/40 backdrop-blur-lg p-6 transition-all duration-500 hover:shadow-2xl hover:border-border/40 hover:-translate-y-2 hover:bg-card/60;
   }
   
   .gradient-text {
