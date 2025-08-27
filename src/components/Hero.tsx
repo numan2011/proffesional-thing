@@ -17,8 +17,31 @@ const Hero = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-accent/20 to-background" />
+    <section className="min-h-screen flex items-center justify-center relative prism-background overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-accent/5 to-background" />
+      
+      {/* Prism geometric background */}
+      <div className="absolute inset-0">
+        {/* Large prism shapes */}
+        <div className="prism-shape w-96 h-96 rotate-45 top-10 left-10 rounded-3xl" />
+        <div className="prism-shape w-64 h-80 rotate-12 bottom-20 right-16 rounded-2xl" />
+        <div className="prism-shape w-48 h-64 -rotate-12 top-1/3 right-1/4 rounded-xl" />
+        <div className="prism-shape w-72 h-48 rotate-45 bottom-1/3 left-1/3 rounded-2xl" />
+        
+        {/* Medium prism shapes */}
+        <div className="prism-shape w-32 h-40 rotate-24 top-1/2 left-16 rounded-lg" />
+        <div className="prism-shape w-40 h-32 -rotate-24 bottom-1/4 right-1/3 rounded-lg" />
+        <div className="prism-shape w-24 h-36 rotate-12 top-20 right-20 rounded-md" />
+        
+        {/* Small accent shapes */}
+        <div className="prism-shape w-16 h-24 -rotate-45 bottom-16 left-1/4 rounded" />
+        <div className="prism-shape w-20 h-16 rotate-60 top-1/4 left-1/2 rounded" />
+        
+        {/* Floating blur elements for depth */}
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl floating-animation" />
+        <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-accent/10 rounded-full blur-3xl floating-animation" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-1/2 right-1/3 w-32 h-32 bg-primary/5 rounded-full blur-2xl floating-animation" style={{ animationDelay: '4s' }} />
+      </div>
       
       <div className="container mx-auto px-6 text-center relative z-10">
         <div className="stagger-children">
