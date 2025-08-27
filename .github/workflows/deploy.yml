@@ -1,0 +1,66 @@
+name: Build and Deploy React to Fasthosts (FTP)
+
+on:
+  push:
+    branches:
+      - main   # or 'master'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      - name: Build React app
+        run: npm run build
+
+      - name: Detect build output folder
+        run: |
+          if [ -d "build" ]; then
+            echo "OUTPUT_DIR=build" >> $GITHUB_ENV
+          elif [ -d "dist" ]; then
+            echo "OUTPUT_DIR=dist" >> $GITHUB_ENV
+          else
+            echo "❌ Could not find build output folder (build/ or dist/)." >&2
+            exit 1
+          fi
+
+      - name: Add .htaccess for React Router
+        run: |
+          mkdir -p ${{ env.OUTPUT_DIR }}
+          cat > "${{ env.OUTPUT_DIR }}/.htaccess" <<'EOF'
+          RewriteEngine On
+          RewriteBase /
+          RewriteRule ^index\.html$ - [L]
+          RewriteCond %{REQUEST_FILENAME} !-f
+          RewriteCond %{REQUEST_FILENAME} !-d
+          RewriteRule . /index.html [L]
+          EOF
+
+      - name: Deploy via FTP to Fasthosts
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /htdocs/
+          local-dir: ${{ env.OUTPUT_DIR }}/
+          exclude: |
+            **/.git*
+            **/.github*
