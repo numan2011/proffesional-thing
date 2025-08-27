@@ -28,10 +28,10 @@ const Hero = () => {
           </Badge>
           
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
-            Building the{" "}
-            <span className="gradient-text">Future</span>
+            Hi, I'm{" "}
+            <span className="gradient-text">Numan Shah</span>
             <br />
-            with AI & Code
+            Building the Future with AI & Code
           </h1>
           
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
